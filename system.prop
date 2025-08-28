@@ -30,3 +30,9 @@ ro.recovery.ui.margin_height=48
 
 # WiFi
 wifi.interface=wlan0
+
+ro.product.marketname=Xiaomi MI 9T
+ro.infinity.soc=Snapdragon 730
+ro.infinity.battery=4000 mAh
+ro.infinity.display=1280 x 2340, 60 Hz
+ro.infinity.camera=48MP + 13MP + 8MP
