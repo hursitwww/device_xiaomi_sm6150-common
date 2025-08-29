@@ -392,3 +392,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # MiuiCamera
 $(call inherit-product-if-exists, vendor/xiaomi/miuicamera/config.mk)
+
+#ViperFX
+$(call inherit-product, packages/apps/ViPER4AndroidFX/config.mk)
