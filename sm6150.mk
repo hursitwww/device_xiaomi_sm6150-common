@@ -36,6 +36,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     fs_config_files
 
+# Sony Dolby
+ifeq ($(TARGET_SHIPS_SOUND_ENHANCEMENT),true)
+$(call inherit-product, vendor/sony/dolby/dolby.mk)
+endif
+
 # Audio
 PRODUCT_PACKAGES += \
     android.hardware.audio@7.0-impl \
@@ -59,8 +64,18 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libaudio-resampler
 
+# Sony Dolby
+ifeq ($(TARGET_SHIPS_SOUND_ENHANCEMENT),true)
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
+    $(LOCAL_PATH)/configs/dolby/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml 
+else
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml
+endif
+
+
+
+PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio/audio_io_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_io_policy.conf \
     $(LOCAL_PATH)/configs/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
     $(LOCAL_PATH)/configs/audio/audio_tuning_mixer_tavil.txt:$(TARGET_COPY_OUT_VENDOR)/etc/audio_tuning_mixer_tavil.txt
@@ -217,10 +232,18 @@ $(call soong_config_set,lineage_health,charging_control_supports_bypass,false)
 PRODUCT_PACKAGES += \
     vendor.lineage.livedisplay-service.xiaomi_sm6150
 
+# Sony Dolby
+ifeq ($(TARGET_SHIPS_SOUND_ENHANCEMENT),true)
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/dolby/media_codecs_c2.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_c2.xml
+else
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/media/media_codecs_c2.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_c2.xml
+endif
+
 # Media
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/media/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
-    $(LOCAL_PATH)/configs/media/media_codecs_c2.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_c2.xml \
     $(LOCAL_PATH)/configs/media/media_codecs_performance_c2.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance_c2.xml \
     $(LOCAL_PATH)/configs/media/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml
 
@@ -394,4 +417,4 @@ PRODUCT_PROPERTY_OVERRIDES += \
 $(call inherit-product-if-exists, vendor/xiaomi/miuicamera/config.mk)
 
 #ViperFX
-$(call inherit-product, packages/apps/ViPER4AndroidFX/config.mk)
+#$(call inherit-product, packages/apps/ViPER4AndroidFX/config.mk)
