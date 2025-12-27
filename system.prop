@@ -37,3 +37,12 @@ ro.lineage.soc=Snapdragon 730
 ro.lineage.battery=4000 mAh
 ro.lineage.display=1280 x 2340, 60 Hz
 ro.lineage.camera=48MP + 13MP + 8MP
+
+# Enable or disable ScrollOptimizer globally
+persist.sys.perf.scroll_opt = false
+
+# Heavy app handling mode
+# 0 - Disable heavy app classification
+# 1 - Enable dynamic detection (based on frame duration and buffer load)
+# 2 - Treat all apps as heavy for performance
+persist.sys.perf.scroll_opt.heavy_app = 0
